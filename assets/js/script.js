@@ -39,13 +39,14 @@ var lookupLocation = (search) => {
     })    
 };
 
+
+//displays location name
 var displayWeather = (weatherData) => {
-    document.getElementById('location-name').textContent = (weatherData.name), (weatherData.country)
-console.log('displayWeather')
+    document.getElementById('location-name').textContent = (weatherData.name)
     getWeather(weatherData.lat, weatherData.lon)
 };
 
-
+//fetch data for location from API
 var getWeather = (lat, lon) => {
     var apiUrl = `${WEATHER_API_URL}/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly&appid=${WEATHER_API_KEY}`;
     fetch(apiUrl)
@@ -53,19 +54,23 @@ var getWeather = (lat, lon) => {
         .then(data => {
             displayCurrent(data)
             displayForecast(data.lon, data.lat)
+
             console.log('here is data')
             console.log(data)
 
             displayCurrent(data);
-            //write functions for current and 5 day forecast
+            //displayForecast(data);
         })
 }
 
-//uvi
+
 //temperature
 //wind speed
+//uvi
 //humidity
 //weather icon
+
+
 
 // fetches the individual values for weather metris
 var displayCurrent = (weatherData) => {
@@ -85,18 +90,10 @@ var displayCurrent = (weatherData) => {
 var forecastList = document.getElementById('forecast-days')
 forecastList.innerHTML ='';
 
-//loop = grab data, assign to var, createElement, append to forecast-days
+//creates blocks for 5 day forecast
 var displayForecast = (lat, lon) => {
-    var apiUrl = `${WEATHER_API_URL}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`;
-fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-        data.list[0]
-        console.log('here is forecast')
-        console.log(data)
-        console.log(data.list[0]);
-    }
-    )
+    
+    document.createElement
 
     
 }
