@@ -55,7 +55,7 @@ var getWeather = (lat, lon) => {
             displayCurrent(data)
             displayForecast(data.lon, data.lat)
 
-            console.log('here is data')
+            console.log('Weather Data')
             console.log(data)
 
             displayCurrent(data);
@@ -75,10 +75,12 @@ var getWeather = (lat, lon) => {
 // fetches the individual values for weather metris
 var displayCurrent = (weatherData) => {
 
-    var temp = weatherData.current.temp;
-    var windSpeed = weatherData.current.wind_speed
-    var uvi = weatherData.current.uvi;
-    var humidity = weatherData.current.humidity;  
+    var currentData = weatherData.current
+
+    var temp = currentData.temp;
+    var windSpeed = currentData.wind_speed
+    var uvi = currentData.uvi;
+    var humidity = currentData.humidity;  
 
     //°F
     document.getElementById('temp-value').textContent = temp
@@ -88,15 +90,28 @@ var displayCurrent = (weatherData) => {
 
 }
 var forecastList = document.getElementById('forecast-days')
-forecastList.innerHTML ='';
+//forecastList.innerHTML ='';
 
-//creates blocks for 5 day forecast
-var displayForecast = (lat, lon) => {
+//creates and displays the blocks for 5 day forecast
+var displayForecast = (weatherData) => {
+
+    var dailyWeather = weatherData.daily;
     
-    document.createElement
+    //make the forecast div show up
+    document.getElementById('forecast').style.display= 'block';
+
+    //var temp = dailyWeather.temp.day;
+    var windSpeed = dailyWeather.wind_speed;
+    //var uvi = dailyWeather.uvi;
+    //var humidity = dailyWeather.humidity;  
+
+    document.getElementById('wind-forecast').textContent = windSpeed;
 
     
 }
+
+//create divs dynamically?
+//document.createElement('div')
 // i+8 3pm each day
 
 
