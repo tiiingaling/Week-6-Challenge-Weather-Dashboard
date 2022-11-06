@@ -53,13 +53,12 @@ var getWeather = (lat, lon) => {
         .then(response => response.json())
         .then(data => {
             displayCurrent(data)
-            displayForecast(data.lon, data.lat)
 
-            console.log('Weather Data')
-            console.log(data)
+            console.log('Weather Data', data)
 
             displayCurrent(data);
-            //displayForecast(data);
+            displayForecast(data);
+
         })
 }
 
@@ -95,17 +94,22 @@ var forecastList = document.getElementById('forecast-days')
 //creates and displays the blocks for 5 day forecast
 var displayForecast = (weatherData) => {
 
-    var dailyWeather = weatherData.daily;
+    var dailyWeather = weatherData.daily[0];
     
     //make the forecast div show up
     document.getElementById('forecast').style.display= 'block';
 
-    //var temp = dailyWeather.temp.day;
+    var temp = dailyWeather.temp.day;
     var windSpeed = dailyWeather.wind_speed;
-    //var uvi = dailyWeather.uvi;
-    //var humidity = dailyWeather.humidity;  
+    var uvi = dailyWeather.uvi;
+    var humidity = dailyWeather.humidity;  
 
+    document.getElementById('temp-forecast').textContent = temp;
     document.getElementById('wind-forecast').textContent = windSpeed;
+    document.getElementById('uv-forecast').textContent = uvi;
+    document.getElementById('humid-forecast').textContent = humidity;
+
+    
 
     
 }
