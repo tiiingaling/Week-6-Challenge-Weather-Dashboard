@@ -102,16 +102,20 @@ var displayForecast = (weatherData) => {
     var temp = dailyWeather.temp.day;
     var windSpeed = dailyWeather.wind_speed;
     var uvi = dailyWeather.uvi;
-    var humidity = dailyWeather.humidity;  
+    var humidity = dailyWeather.humidity;
 
-    document.getElementById('temp-forecast').textContent = temp;
-    document.getElementById('wind-forecast').textContent = windSpeed;
+    var UNIX = (dailyWeather.dt * 1000)
+    var options = {weekday: 'long', month: 'long', day: 'numeric'}
+    var datestamp = new Date(UNIX).toLocaleDateString("en-gb", options)
+    console.log(datestamp)
+
+
+    document.getElementById('date').textContent = datestamp;
+    document.getElementById('temp-forecast').textContent = temp + ' °F';
+    document.getElementById('wind-forecast').textContent = windSpeed + ' mph';
     document.getElementById('uv-forecast').textContent = uvi;
     document.getElementById('humid-forecast').textContent = humidity;
-
-    
-
-    
+  
 }
 
 //create divs dynamically?
