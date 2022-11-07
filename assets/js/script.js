@@ -102,64 +102,51 @@ var displayForecast = (weatherData) => {
     list.innerHTML = '';
 
 //creates multiple blocks to display forecast
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
         var dailyWeather = weatherData.daily[i];
     
         //date conversion from UNIX
         var UNIX = (dailyWeather.dt * 1000)        
         var options = {weekday: 'long', month: 'long', day: 'numeric'}
 
-        console.log(datestamp)
-
         var datestamp = new Date(UNIX).toLocaleDateString("en-gb", options)
-        var temp = dailyWeather.temp.day;
-        var windSpeed = dailyWeather.wind_speed;
+        var temp = dailyWeather.temp.day + ' °F';
+        var windSpeed = dailyWeather.wind_speed + ' mph';
+        var humidity = dailyWeather.humidity + ' %';
         var uvi = dailyWeather.uvi;
-        var humidity = dailyWeather.humidity;
 
-        var date = document.getElementById('date').textContent = datestamp;
-        var tempValue = document.getElementById('temp-forecast').textContent = temp + ' °F';
-        var windValue = document.getElementById('wind-forecast').textContent = windSpeed + ' mph';
-        var humidValue = document.getElementById('humid-forecast').textContent = humidity + ' &';
-        var uvValue = document.getElementById('uv-forecast').textContent = uvi;
+            var newDay = document.createElement('div');
+            newDay.classList.add('day');
+            newDay.innerHTML =   
+            `<div class="info">
+                <div class="date">
+                    <span>Date:</span>
+                    <span id="date">${datestamp}</span>
+                </div>
 
-        var newDay = document.createElement('div');
-        newDay.classList.add('day');
-        newDay.innerHTML =   
-        `<div class="info">
-            <div class="date">
-                <span>Date:</span>
-                <span id="date">${date}</span>
-            </div>
+                <div class="temperature">
+                    <span>temp:</span>
+                    <span id="temp-forecast">${temp}</span>
+                </div>
 
-            <div class="temperature">
-                <span>temp:</span>
-                <span id="temp-forecast">${tempValue}</span>
-            </div>
+                <div class="wind">
+                    <span>Wind Speed:</span>
+                    <span id="wind-forecast">${windSpeed}</span>
+                </div>
 
-            <div class="wind">
-                <span>Wind Speed:</span>
-                <span id="wind-forecast">${windValue}</span>
-            </div>
+                <div class="humidity">
+                    <span>Humidity:</span>
+                    <span id="humid-forecast">${humidity}</span>
+                </div>
 
-            <div class="humidity">
-                <span>Humidity:</span>
-                <span id="humid-forecast">${humidValue}</span>
-            </div>
-
-            <div class="uv-index">
-                <span>UV Index:</span>
-                <span id="uv-forecast">${uvValue}</span>
-            </div>
-        </div>`;
+                <div class="uv-index">
+                    <span>UV Index:</span>
+                    <span id="uv-forecast">${uvi}</span>
+                </div>
+            </div>`;
     
         list.appendChild(newDay);
         }
   }
-
-//create divs dynamically?
-//document.createElement('div')
-// i+8 3pm each day
-
 
 searchButton.addEventListener('click', getLocation);
