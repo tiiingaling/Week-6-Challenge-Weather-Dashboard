@@ -41,7 +41,7 @@ var lookupLocation = (search) => {
 
 //displays location name
 var displayWeather = (weatherData) => {
-    document.getElementById('location-name').textContent = (weatherData.name)
+    document.getElementById('location-name').textContent = (weatherData.name) + ', '+ (weatherData.state)
     getWeather(weatherData.lat, weatherData.lon)
 };
 
@@ -68,11 +68,13 @@ var displayCurrent = (weatherData) => {
     var uvi = currentData.uvi;
     var humidity = currentData.humidity;
 
-    var iconURL = `https://openweathermap.org/img/w/${iconCode}.png`;
     var iconCode = currentData.weather[0].icon;
+    var iconURL = `https://openweathermap.org/img/w/${iconCode}.png`;
     
     //write icon as img into html?
-
+    var img = document.createElement('img');
+    img.src = iconURL;
+    document.getElementById('weather-icon').appendChild(img);
     
     document.getElementById('temp-value').textContent = temp
     document.getElementById('wind-value').textContent = windSpeed
@@ -96,7 +98,7 @@ var displayForecast = (weatherData) => {
     
         //date conversion from UNIX
         var UNIX = (dailyWeather.dt * 1000)        
-        var options = {weekday: 'long', month: 'long', day: 'numeric'}
+        var options = {weekday: 'long', month: 'short', day: 'numeric'}
 
         var datestamp = new Date(UNIX).toLocaleDateString("en-gb", options)
         var temp = dailyWeather.temp.day + ' °F';
@@ -104,12 +106,19 @@ var displayForecast = (weatherData) => {
         var humidity = dailyWeather.humidity + ' %';
         var uvi = dailyWeather.uvi;
 
+        var forecastIconCode = dailyWeather.weather[0].icon;
+        var forecastIconURL = `https://openweathermap.org/img/w/${forecastIconCode}.png`
+
             var newDay = document.createElement('div');
             newDay.classList.add('day');
             newDay.innerHTML =   
             `<div class="info">
                 <div class="date">
                     <span id="date" class="bold">${datestamp}</span>
+                </div>
+
+                <div class="icon">
+                    <img src="${forecastIconURL}"></img>
                 </div>
 
                 <div class="temperature">
