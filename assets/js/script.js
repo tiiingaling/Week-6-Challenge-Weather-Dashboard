@@ -39,7 +39,6 @@ var lookupLocation = (search) => {
     })    
 };
 
-
 //displays location name
 var displayWeather = (weatherData) => {
     document.getElementById('location-name').textContent = (weatherData.name)
@@ -52,24 +51,12 @@ var getWeather = (lat, lon) => {
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            displayCurrent(data)
-
             console.log('Weather Data', data)
 
             displayCurrent(data);
             displayForecast(data);
-
         })
 }
-
-
-//temperature
-//wind speed
-//uvi
-//humidity
-//weather icon
-
-
 
 // fetches the individual values for weather metris
 var displayCurrent = (weatherData) => {
@@ -79,25 +66,27 @@ var displayCurrent = (weatherData) => {
     var temp = currentData.temp;
     var windSpeed = currentData.wind_speed
     var uvi = currentData.uvi;
-    var humidity = currentData.humidity;  
+    var humidity = currentData.humidity;
 
-    //°F
+    var iconURL = `https://openweathermap.org/img/w/${iconCode}.png`;
+    var iconCode = currentData.weather[0].icon;
+    
+    //write icon as img into html?
+
+    
     document.getElementById('temp-value').textContent = temp
     document.getElementById('wind-value').textContent = windSpeed
     document.getElementById('uv-value').textContent = uvi
     document.getElementById('humid-value').textContent = humidity  
 
 }
-var forecastList = document.getElementById('forecast-days')
-//forecastList.innerHTML ='';
-
 //creates and displays the blocks for 5 day forecast
 var displayForecast = (weatherData) => {
   
     //make the forecast div show up
     document.getElementById('forecast').style.display= 'block';
 
-    //clears html
+    //clears html for next search
     var list = document.getElementById('forecast-days')
     list.innerHTML = '';
 
@@ -120,12 +109,11 @@ var displayForecast = (weatherData) => {
             newDay.innerHTML =   
             `<div class="info">
                 <div class="date">
-                    <span>Date:</span>
-                    <span id="date">${datestamp}</span>
+                    <span id="date" class="bold">${datestamp}</span>
                 </div>
 
                 <div class="temperature">
-                    <span>temp:</span>
+                    <span>Temp:</span>
                     <span id="temp-forecast">${temp}</span>
                 </div>
 
