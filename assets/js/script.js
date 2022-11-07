@@ -55,6 +55,7 @@ var getWeather = (lat, lon) => {
 
             displayCurrent(data);
             displayForecast(data);
+            
         })
 }
 
@@ -70,18 +71,19 @@ var displayCurrent = (weatherData) => {
 
     var iconCode = currentData.weather[0].icon;
     var iconURL = `https://openweathermap.org/img/w/${iconCode}.png`;
-    
+    var weatherDesc = currentData.weather[0].description;
+       
     //write icon as img into html?
-    var img = document.createElement('img');
-    img.src = iconURL;
-    document.getElementById('weather-icon').appendChild(img);
-    
-    document.getElementById('temp-value').textContent = temp
-    document.getElementById('wind-value').textContent = windSpeed
-    document.getElementById('uv-value').textContent = uvi
-    document.getElementById('humid-value').textContent = humidity  
+    var weatherIcon = document.getElementById('weather-icon');
+    weatherIcon.innerHTML = `<img src="${iconURL}" alt="${weatherDesc}"></img>`
 
+    document.getElementById('temp-value').textContent = temp + ' °F'
+    document.getElementById('wind-value').textContent = windSpeed + ' mph'
+    document.getElementById('humid-value').textContent = humidity + ' %'
+    document.getElementById('uv-value').textContent = uvi
 }
+
+
 //creates and displays the blocks for 5 day forecast
 var displayForecast = (weatherData) => {
   

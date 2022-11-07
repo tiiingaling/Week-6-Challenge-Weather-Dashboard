@@ -1,23 +1,38 @@
+:root {
+    --green: rgb(110, 141, 122)
+}
+
+* {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 body {
-    background-color: rgb(61, 61, 61);
-    font-family: monospace;
+    background-color: #5A6C73;
 }
 
 header {
     background-color: darkslategray;
     height: 150px;
     color:aliceblue;
+    text-align: right;
+    padding: 50px;
+}
+
+main {
+    margin: 50px;
 }
 
 h1 {
     font-size: 50px;
     font-weight: 400;
-    letter-spacing: 3px;
+    letter-spacing: 10px;
     color: #f8f8ff;
 }
 
 aside {
     float: left;
+    margin-right: 20px;
+
 }
 
 .recent-section {
@@ -35,7 +50,7 @@ aside {
     border-color: white;
     display: inline-block;
     justify-content: center;
-    background-color: bisque;
+    background-color: var(--green);
 }
 
 #forecast {
@@ -50,7 +65,7 @@ aside {
 }
 
 .day {
-    background-color: bisque;
+    background-color: var(--green);
     padding: 10px;
     border-radius: 10px;    
 }
