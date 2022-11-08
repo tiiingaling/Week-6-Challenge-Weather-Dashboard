@@ -32,7 +32,10 @@ h1 {
 aside {
     float: left;
     margin-right: 20px;
+}
 
+.search-container {
+    size-adjust: 1.5rem;
 }
 
 .recent-section {
@@ -40,14 +43,12 @@ aside {
     height: 200px;
     margin-top: 15px;
     border-radius: 5px;
-
 }
 
 #current-weather {
     border: 1px;
     border-radius: 5%;
     padding: 10px;
-    border-color: white;
     display: inline-block;
     justify-content: center;
     background-color: var(--green);
@@ -55,13 +56,15 @@ aside {
 
 #forecast {
     display: none;
-    float: right;
+    float: center;
 }
 
 #forecast-days {
     display: flex;
+    width: 50%;
     flex-direction: row;
     justify-content: space-evenly;
+    gap: 10px;
 }
 
 .day {

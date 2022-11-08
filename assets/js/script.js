@@ -1,17 +1,13 @@
-//pseudo code
 
-//search input (location/city)
-//5 day current and future weather conditions for that city
 //city added to search history
-//city name. date. icon of weather, temperature, humidity wind speed
 //click on city in history, showed the conditions again
 
-//end
 
 
 var WEATHER_API_URL = 'https://api.openweathermap.org';
 var WEATHER_API_KEY = 'd91f911bcf2c0f925fb6535547a5ddc9';
 var searchButton = document.getElementById('search');
+var recentLocations = [];
 
 //arrow function for more compact function coding
 //takes location name from user input 
@@ -21,8 +17,16 @@ const getLocation = () => {
     console.log(userLocation)
 
     lookupLocation(userLocation);
+    addLocation(userLocation);
 };
 
+
+function addLocation (selectedLocation) {
+    recentLocations.push(selectedLocation);
+    console.log(recentLocations)
+
+    localStorage.setItem("recentLocations", JSON.stringify(recentLocations));
+}
 
 //fetch the lon,lat data from LocationInput
 var lookupLocation = (search) => {
@@ -32,11 +36,10 @@ var lookupLocation = (search) => {
         .then(data => {
 
         var location = data[0];
-        
         displayWeather(location)
 
         console.log(location);
-    })    
+    })
 };
 
 //displays location name
@@ -69,11 +72,11 @@ var displayCurrent = (weatherData) => {
     var uvi = currentData.uvi;
     var humidity = currentData.humidity;
 
+    //icon data from API
     var iconCode = currentData.weather[0].icon;
     var iconURL = `https://openweathermap.org/img/w/${iconCode}.png`;
     var weatherDesc = currentData.weather[0].description;
        
-    //write icon as img into html?
     var weatherIcon = document.getElementById('weather-icon');
     weatherIcon.innerHTML = `<img src="${iconURL}" alt="${weatherDesc}"></img>`
 
@@ -147,5 +150,7 @@ var displayForecast = (weatherData) => {
         list.appendChild(newDay);
         }
   }
+
+
 
 searchButton.addEventListener('click', getLocation);
