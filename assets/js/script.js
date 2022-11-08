@@ -11,7 +11,7 @@ var recentLocations = [];
 
 //arrow function for more compact function coding
 //takes location name from user input 
-const getLocation = () => {
+var getLocation = () => {
     var locationInput = document.getElementById('location')
     var userLocation = locationInput.value;
     console.log(userLocation)
@@ -20,8 +20,8 @@ const getLocation = () => {
     addLocation(userLocation);
 };
 
-
-function addLocation (selectedLocation) {
+//stores searched location to localStorage
+var addLocation = (selectedLocation) => {
     recentLocations.push(selectedLocation);
     console.log(recentLocations)
 
