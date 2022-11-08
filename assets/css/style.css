@@ -43,6 +43,15 @@ aside {
     height: 200px;
     margin-top: 15px;
     border-radius: 5px;
+    font-size: 15pt;
+    padding: 10px;
+}
+
+.recent:hover {
+    cursor: pointer;
+    background-color: #131313;
+    border-radius: 5px;
+    color: wheat;    
 }
 
 #current-weather {

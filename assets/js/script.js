@@ -1,24 +1,23 @@
-
-//city added to search history
-//click on city in history, showed the conditions again
-
-
-
+//Global variables
 var WEATHER_API_URL = 'https://api.openweathermap.org';
 var WEATHER_API_KEY = 'd91f911bcf2c0f925fb6535547a5ddc9';
+
 var searchButton = document.getElementById('search');
 var recentLocations = [];
+
+console.log(recentLocations)
 
 //arrow function for more compact function coding
 //takes location name from user input 
 var getLocation = () => {
+
     var locationInput = document.getElementById('location')
     var userLocation = locationInput.value;
-    console.log(userLocation)
+    console.log("saved locations", userLocation)
 
     lookupLocation(userLocation);
     addLocation(userLocation);
-};
+}
 
 //stores searched location to localStorage
 var addLocation = (selectedLocation) => {
@@ -26,7 +25,54 @@ var addLocation = (selectedLocation) => {
     console.log(recentLocations)
 
     localStorage.setItem("recentLocations", JSON.stringify(recentLocations));
+
+    updateRecentLocationsList();
 }
+
+//adds searched locations to history list with loop
+var updateRecentLocationsList = () => {
+      
+    var recentList = document.getElementById('recent-locations') 
+    recentList.innerHTML = '';   
+    
+    for (var i =0; i < recentLocations.length; i++) {
+        var location = recentLocations[i];        
+
+        var newLocation = document.createElement('div');
+        newLocation.classList.add('recent')
+        newLocation.addEventListener('click', onClickRecentLocation);
+        console.log('location', location);
+        newLocation.textContent = location;
+
+        recentList.appendChild(newLocation)
+    }
+}
+
+//load the list
+var loadRecent = () => {
+    var locations = localStorage.getItem('recentLocations');
+    if (locations) {
+        //the ... creates separate items instead of one array
+        recentLocations.push(...JSON.parse(locations));
+
+        updateRecentLocationsList();
+    }
+}
+
+//click the location to bring up previous results
+var onClickRecentLocation = (event) => {
+
+    // What was the Location solected?
+    const locationName = event.target.textContent;
+
+    // Find it in our list and display it
+    recentLocations.filter(location => {
+        if (location.name === locationName) {
+            displayWeather(location);
+        }
+    });
+}
+
 
 //fetch the lon,lat data from LocationInput
 var lookupLocation = (search) => {
@@ -62,7 +108,7 @@ var getWeather = (lat, lon) => {
         })
 }
 
-// fetches the individual values for weather metris
+// fetches the individual values for weather metrics
 var displayCurrent = (weatherData) => {
 
     var currentData = weatherData.current
@@ -151,6 +197,6 @@ var displayForecast = (weatherData) => {
         }
   }
 
-
-
 searchButton.addEventListener('click', getLocation);
+
+loadRecent();
