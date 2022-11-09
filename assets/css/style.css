@@ -10,6 +10,7 @@ body {
     background-color: #5A6C73;
 }
 
+
 header {
     background-color: darkslategray;
     height: 150px;
@@ -18,15 +19,22 @@ header {
     padding: 50px;
 }
 
-main {
-    margin: 50px;
-}
-
 h1 {
     font-size: 50px;
-    font-weight: 400;
+    font-weight: 300;
     letter-spacing: 10px;
     color: #f8f8ff;
+}
+
+main {
+    margin: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
 }
 
 aside {
@@ -34,17 +42,17 @@ aside {
     margin-right: 20px;
 }
 
-.search-container {
-    size-adjust: 1.5rem;
+.recent-section {
+    height: auto;
+    margin-top: 15px;
+    font-size: 15pt;
 }
 
-.recent-section {
+.recent {
     background-color: gray;
-    height: 200px;
-    margin-top: 15px;
-    border-radius: 5px;
-    font-size: 15pt;
     padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
 }
 
 .recent:hover {
@@ -61,6 +69,7 @@ aside {
     display: inline-block;
     justify-content: center;
     background-color: var(--green);
+    width: auto;
 }
 
 #forecast {
@@ -70,7 +79,7 @@ aside {
 
 #forecast-days {
     display: flex;
-    width: 50%;
+    width: 100%;
     flex-direction: row;
     justify-content: space-evenly;
     gap: 10px;
@@ -79,10 +88,17 @@ aside {
 .day {
     background-color: var(--green);
     padding: 10px;
-    border-radius: 10px;    
+    border-radius: 10px;
 }
 
 .bold {
     font-weight: bold;
 }
 
+
+/*Media Query*/
+@media screen and (max-width: 992px) {
+    main {
+        width: 50%;
+    }
+}

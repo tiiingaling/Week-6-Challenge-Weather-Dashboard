@@ -1,3 +1,5 @@
+
+
 //Global variables
 var WEATHER_API_URL = 'https://api.openweathermap.org';
 var WEATHER_API_KEY = 'd91f911bcf2c0f925fb6535547a5ddc9';
@@ -40,7 +42,7 @@ var updateRecentLocationsList = () => {
 
         var newLocation = document.createElement('div');
         newLocation.classList.add('recent')
-        newLocation.addEventListener('click', onClickRecentLocation);
+        newLocation.addEventListener('click', clickLocation);
         console.log('location', location);
         newLocation.textContent = location;
 
@@ -60,18 +62,16 @@ var loadRecent = () => {
 }
 
 //click the location to bring up previous results
-var onClickRecentLocation = (event) => {
-
+var clickLocation = (event) => {
+console.log(event.target.textContent)
     // What was the Location solected?
     const locationName = event.target.textContent;
 
     // Find it in our list and display it
-    recentLocations.filter(location => {
-        if (location.name === locationName) {
-            displayWeather(location);
-        }
-    });
+
+    lookupLocation(locationName);
 }
+
 
 
 //fetch the lon,lat data from LocationInput
